@@ -1,0 +1,23 @@
+# GitHubActions for testing
+# read the docs: https://help.github.com/en/actions/configuring-and-managing-workflows/configuring-a-workflow
+
+name: Download unknown artifact
+
+on:
+  push:
+
+jobs:
+  download-unknown:
+    name: dummy
+    runs-on: ubuntu-latest
+    steps:
+      - name: before download
+        run: echo 1
+      - name: fetch unknown artifact
+        continue-on-error: true
+        # see https://github.com/actions/download-artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: unknown
+      - name: after download
+        run: echo 2 
